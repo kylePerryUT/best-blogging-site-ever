@@ -24,7 +24,8 @@
   }
 
   .loginBtn {
-    padding: 12px;
+    padding: 4px;
+    margin: 8px;
     border: 1px solid black;
     border-radius: 4px;
   }
