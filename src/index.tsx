@@ -8,6 +8,9 @@ import ErrorPage from "./components/error-page/ErrorPage";
 import Posts from "./components/posts/Posts";
 import Post from "./components/post/Post";
 import WritePost from "./components/write-post/WritePost";
+import Login from "./components/login/Login";
+import SignUp from "./components/sign-up/SignUp";
+import Paths from "./models/enums/paths";
 
 const router = createBrowserRouter([
   {
@@ -16,24 +19,32 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        path: "posts",
+        path: Paths.POSTS,
         element: <Posts />,
       },
       {
-        path: "posts/:postId",
+        path: Paths.POST,
         element: <Post />,
       },
       {
-        path: "posts/new",
+        path: Paths.WRITE_POST,
         element: <WritePost />,
       },
       {
-        path: "posts/:postId/edit",
+        path: Paths.EDIT_POST,
         element: <WritePost />,
       },
       {
-        path: "posts/my-posts",
+        path: Paths.MY_POSTS,
         element: <Posts />,
+      },
+      {
+        path: Paths.LOGIN,
+        element: <Login />,
+      },
+      {
+        path: Paths.SIGN_UP,
+        element: <SignUp />,
       },
     ],
   },
