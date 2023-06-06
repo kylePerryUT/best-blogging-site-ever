@@ -1,0 +1,31 @@
+.Header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px;
+
+  .iconAndNavBtns {
+    display: flex;
+    flex-direction: row;
+
+    .icon {
+      padding: 12px;
+    }
+  }
+
+  .navBtn {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+  }
+
+  .loginBtn {
+    padding: 12px;
+    border: 1px solid black;
+    border-radius: 4px;
+  }
+}
