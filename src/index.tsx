@@ -11,6 +11,7 @@ import WritePost from "./components/write-post/WritePost";
 import Login from "./components/login/Login";
 import SignUp from "./components/sign-up/SignUp";
 import Paths from "./models/enums/paths";
+import RequireAuth from "./components/require-auth/RequireAuth";
 import { AuthProvider } from "./context/auth-provider";
 
 const router = createBrowserRouter([
@@ -31,24 +32,29 @@ const router = createBrowserRouter([
         element: <Post />,
       },
       {
-        path: Paths.WRITE_POST,
-        element: <WritePost />,
-      },
-      {
-        path: Paths.EDIT_POST,
-        element: <WritePost />,
-      },
-      {
-        path: Paths.MY_POSTS,
-        element: <Posts />,
-      },
-      {
         path: Paths.LOGIN,
         element: <Login />,
       },
       {
         path: Paths.SIGN_UP,
         element: <SignUp />,
+      },
+      {
+        element: <RequireAuth />,
+        children: [
+          {
+            path: Paths.WRITE_POST,
+            element: <WritePost />,
+          },
+          {
+            path: Paths.EDIT_POST,
+            element: <WritePost />,
+          },
+          {
+            path: Paths.MY_POSTS,
+            element: <Posts />,
+          },
+        ],
       },
     ],
   },
