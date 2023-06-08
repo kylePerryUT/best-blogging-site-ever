@@ -11,6 +11,7 @@ import WritePost from "./components/write-post/WritePost";
 import Login from "./components/login/Login";
 import SignUp from "./components/sign-up/SignUp";
 import Paths from "./models/enums/paths";
+import { AuthProvider } from "./context/auth-provider";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,9 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        element: <Posts />,
+      },
+      {
         path: Paths.POSTS,
         element: <Posts />,
       },
@@ -56,7 +60,9 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>
 );
 

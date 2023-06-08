@@ -1,3 +1,31 @@
 .SignUp {
   display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    & label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .inputInfo {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+    }
+  }
+
+  .textBtn {
+    cursor: pointer;
+    font-style: italic;
+    text-decoration: underline;
+  }
 }

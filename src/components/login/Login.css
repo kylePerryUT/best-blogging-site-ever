@@ -1,3 +1,32 @@
 .Login {
+  flex: 1;
+  height: 100%;
+  width: 100%;
   display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  .loginModal {
+    height: 300px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    /* box-shadow: 0 0 10px gray; */
+    /* border-radius: 8px; */
+
+    .loginForm {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      padding: 8px;
+    }
+  }
+
+  .textBtn {
+    cursor: pointer;
+    font-style: italic;
+    text-decoration: underline;
+  }
 }
