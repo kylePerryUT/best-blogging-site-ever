@@ -1,13 +1,17 @@
 import React, { FC, useState } from "react";
 import "./Login.css";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Paths from "../../models/enums/paths";
-import axios from "../../api/axios";
+// import { axiosPrivate } from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
+import { useAxiosPrivateWithAuth } from "../../hooks/useAxiosPrivate";
 
 const Login: FC = () => {
   const authContext = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const axiosPrivateWithAuth = useAxiosPrivateWithAuth();
+  const from = location.state?.from?.pathname ?? "/";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,7 +26,7 @@ const Login: FC = () => {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    axios
+    axiosPrivateWithAuth
       .post(
         "/users/sign_in",
         JSON.stringify({
@@ -41,8 +45,9 @@ const Login: FC = () => {
         console.log(JSON.stringify(response));
         const accessToken: string = response.headers.authorization;
         const username: string = response.data.display_name;
-        authContext?.setAuth({ username, accessToken });
-        navigate(Paths.MY_POSTS);
+        const userId: number = response.data.id;
+        authContext?.setAuth({ id: userId, username, accessToken });
+        navigate(from, { replace: true });
       })
       .catch((error) => console.error(error));
     // Reset form fields

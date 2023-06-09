@@ -5,7 +5,6 @@ import reportWebVitals from "./reportWebVitals";
 import App from "./components/app/App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./components/error-page/ErrorPage";
-import Posts from "./components/posts/Posts";
 import Post from "./components/post/Post";
 import WritePost from "./components/write-post/WritePost";
 import Login from "./components/login/Login";
@@ -13,6 +12,8 @@ import SignUp from "./components/sign-up/SignUp";
 import Paths from "./models/enums/paths";
 import RequireAuth from "./components/require-auth/RequireAuth";
 import { AuthProvider } from "./context/auth-provider";
+import MyPosts from "./components/my-posts/MyPosts";
+import DiscoverPosts from "./components/discover-posts/DiscoverPosts";
 
 const router = createBrowserRouter([
   {
@@ -21,11 +22,11 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Posts />,
+        element: <DiscoverPosts />,
       },
       {
         path: Paths.POSTS,
-        element: <Posts />,
+        element: <DiscoverPosts />,
       },
       {
         path: Paths.POST,
@@ -52,7 +53,7 @@ const router = createBrowserRouter([
           },
           {
             path: Paths.MY_POSTS,
-            element: <Posts />,
+            element: <MyPosts />,
           },
         ],
       },

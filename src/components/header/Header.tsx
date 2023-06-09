@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import Paths from "../../models/enums/paths";
 import "./Header.css";
@@ -8,7 +8,6 @@ import useAuth from "../../hooks/useAuth";
 const Header: FC = () => {
   const authContext = useAuth();
   const navigate = useNavigate();
-  // TODO: get from logged in user
   const username = authContext?.auth?.username;
 
   return (

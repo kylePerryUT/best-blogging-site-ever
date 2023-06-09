@@ -1,6 +1,6 @@
 import React, { createContext, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { AuthenticatedUser } from "../../models/interfaces/authenticated-user-type";
+import { AuthenticatedUser } from "../../models/interfaces/authenticated-user";
 import Header from "../header/Header";
 import "./App.css";
 
