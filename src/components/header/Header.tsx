@@ -1,14 +1,14 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import Paths from "../../models/enums/paths";
 import "./Header.css";
 import { FaBlog } from "react-icons/fa";
+import useAuth from "../../hooks/useAuth";
 
 const Header: FC = () => {
-  const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  const authContext = useAuth();
   const navigate = useNavigate();
-  // TODO: get from logged in user
-  const user = { name: "Kyle Perry" };
+  const username = authContext?.auth?.username;
 
   return (
     <div className="Header">
@@ -23,8 +23,10 @@ const Header: FC = () => {
           Write
         </div>
       </div>
-      {loggedIn ? (
-        <div className="navBtn">{user.name}</div>
+      {!!username ? (
+        <div className="navBtn" onClick={() => navigate("/posts/my-posts")}>
+          {username}
+        </div>
       ) : (
         <div className="navBtn loginBtn" onClick={() => navigate(Paths.LOGIN)}>
           Log in
