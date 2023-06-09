@@ -11,9 +11,9 @@ import Login from "./components/login/Login";
 import SignUp from "./components/sign-up/SignUp";
 import Paths from "./models/enums/paths";
 import RequireAuth from "./components/require-auth/RequireAuth";
-import { AuthProvider } from "./context/auth-provider";
 import MyPosts from "./components/my-posts/MyPosts";
 import DiscoverPosts from "./components/discover-posts/DiscoverPosts";
+import { AppContextProvider } from "./context/app-context";
 
 const router = createBrowserRouter([
   {
@@ -67,9 +67,9 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <AuthProvider>
+    <AppContextProvider>
       <RouterProvider router={router} />
-    </AuthProvider>
+    </AppContextProvider>
   </React.StrictMode>
 );
 

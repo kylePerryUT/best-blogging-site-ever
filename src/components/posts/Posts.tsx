@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import "./Posts.css";
 import { Post } from "../../models/interfaces/post";
+import PostOverview from "../post-overview/PostOverview";
 
 interface PostsProps {
   posts: Post[];
@@ -8,18 +9,9 @@ interface PostsProps {
 
 const Posts: FC<PostsProps> = ({ posts }) => {
   const renderPosts = () =>
-    posts.map((post) => (
-      <div>
-        <h3>This is a post body</h3>
-        <h4>{post.body}</h4>
-      </div>
-    ));
+    posts.map((post) => <PostOverview key={post.id} post={post} />);
 
-  return (
-    <div className="DiscoverPosts">
-      <div>{renderPosts()}</div>
-    </div>
-  );
+  return <div className="Posts">{renderPosts()}</div>;
 };
 
 export default Posts;

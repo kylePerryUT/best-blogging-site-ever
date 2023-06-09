@@ -1,13 +1,14 @@
 import { FC, useContext, useEffect, useMemo, useState } from "react";
 import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 import { Post } from "../../models/interfaces/post";
-import AuthContext from "../../context/auth-provider";
 import Posts from "../posts/Posts";
+import "./MyPosts.css";
+import AppContext from "../../context/app-context";
 
 const MyPosts: FC = () => {
   const axiosPrivate = useAxiosPrivate();
-  const authContext = useContext(AuthContext);
-  const loggedInUserId = useMemo(() => authContext?.auth.id, [authContext]);
+  const userState = useContext(AppContext)?.appState.userState;
+  const loggedInUserId = useMemo(() => userState?.user.id, [userState]);
 
   // TODO: replace with posts from context
   const [posts, setPosts] = useState<Post[]>([]);

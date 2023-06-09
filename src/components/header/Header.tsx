@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import Paths from "../../models/enums/paths";
 import "./Header.css";
 import { FaBlog } from "react-icons/fa";
-import useAuth from "../../hooks/useAuth";
+import useUser from "../../hooks/useUser";
 
 const Header: FC = () => {
-  const authContext = useAuth();
+  const userContext = useUser();
   const navigate = useNavigate();
-  const username = authContext?.auth?.username;
+  const username = userContext?.user?.display_name;
 
   return (
     <div className="Header">
