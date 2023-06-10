@@ -11,7 +11,7 @@ const PostOverview: FC<PostOverviewProps> = ({ post }) => {
   return (
     <div className="PostOverview">
       <div className="title">{post.title}</div>
-      <div className="username">{post.user.display_name}</div>
+      <div className="username">{post.user?.display_name ?? "No username"}</div>
       <div className="createdDate">
         {dayjs(post.created_at).format("MMM D YYYY")}
       </div>

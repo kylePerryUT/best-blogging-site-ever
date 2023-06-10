@@ -23,11 +23,11 @@ const USER_DEFAULT_STATE: User = {
 };
 
 interface PostsState {
-  posts: Post[];
-  setPosts: React.Dispatch<React.SetStateAction<Post[]>>;
+  posts: Map<number, Post>;
+  setPosts: React.Dispatch<React.SetStateAction<Map<number, Post>>>;
 }
 
-const POSTS_DEFAULT_STATE: Post[] = [];
+const POSTS_DEFAULT_STATE: Map<number, Post> = new Map<number, Post>();
 
 interface CommentsState {
   comments: Comment[];
@@ -53,7 +53,7 @@ interface AppProviderProps {
 export const AppContextProvider: FC<AppProviderProps> = ({ children }) => {
   const [auth, setAuth] = useState<Authentication>(AUTH_DEFAULT_STATE);
   const [user, setUser] = useState<User>(USER_DEFAULT_STATE);
-  const [posts, setPosts] = useState<Post[]>(POSTS_DEFAULT_STATE);
+  const [posts, setPosts] = useState<Map<number, Post>>(POSTS_DEFAULT_STATE);
   const [comments, setComments] = useState<Comment[]>(COMMENTS_DEFAULT_STATE);
 
   return (
