@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo, useState } from "react";
+import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
 import "./Posts.css";
 import { Post } from "../../models/interfaces/post";
 import PostOverview from "../post-overview/PostOverview";
@@ -16,27 +16,42 @@ interface PostsPayloadMetaInfo {
 }
 
 const Posts: FC<PostsProps> = ({ filter }) => {
+  const PAGE_SIZE = 30;
+  const [pageNumber, setPageNumber] = useState<number>(1);
+  const expectedPostsCount = PAGE_SIZE * pageNumber;
   const [postsPayloadMetaInfo, setPostsPayloadMetaInfo] =
     useState<PostsPayloadMetaInfo | null>();
-  const [isLoadingPosts, setIsLoadingPosts] = useState<boolean>(false);
+  const [isFetchInProgress, setIsFetchInProgress] = useState<boolean>(false);
 
   const axiosPrivate = useAxiosPrivate();
   const postsState = usePosts();
 
-  const postsToRender: Post[] = useMemo(() => {
-    const postsMap = postsState?.posts;
-    let posts = !!postsMap ? Array.from(postsMap.values()) : [];
-    if (!!filter) posts = posts.filter(filter);
-    return posts;
-  }, [postsState, filter]);
+  const getPostsToRender = useCallback(
+    (postsMap: Map<number, Post>): Post[] => {
+      let posts = !!postsMap ? Array.from(postsMap.values()) : [];
+      if (!!filter) posts = posts.filter(filter);
+      return posts;
+    },
+    [filter]
+  );
 
   const getNextPageNumber = (currentPageNumber: number | undefined) =>
     currentPageNumber === undefined ? 1 : currentPageNumber + 1;
 
-  const fetchPosts = async () => {
+  const isMorePosts = useCallback(() => {
+    if (!postsPayloadMetaInfo) return true;
+    if (!!postsState) {
+      const isMorePosts =
+        postsState.posts.size < postsPayloadMetaInfo.total_entries;
+      return isMorePosts;
+    }
+    return true;
+  }, [postsPayloadMetaInfo, postsState]);
+
+  const fetchPosts = useCallback(async () => {
     // Don't make a call to load more posts if were already loading some
-    if (!isLoadingPosts) {
-      setIsLoadingPosts(true);
+    if (!isFetchInProgress) {
+      setIsFetchInProgress(true);
       await axiosPrivate
         .get("/posts", {
           params: {
@@ -52,46 +67,65 @@ const Posts: FC<PostsProps> = ({ filter }) => {
             postsState.setPosts(postsMap);
             setPostsPayloadMetaInfo({ ...response.data.meta });
           }
-          setIsLoadingPosts(false);
-          // TODO: Handle this error state
         })
         .catch((error) => {
-          setIsLoadingPosts(false);
           console.error(error);
         });
+      setIsFetchInProgress(false);
     }
-  };
+  }, [axiosPrivate, isFetchInProgress, postsPayloadMetaInfo, postsState]);
+
+  const needToLoadMorePosts = useMemo(
+    () =>
+      !!postsState &&
+      getPostsToRender(postsState.posts).length < expectedPostsCount &&
+      isMorePosts(),
+    [postsState, expectedPostsCount, isMorePosts, getPostsToRender]
+  );
 
   useEffect(() => {
-    if (postsState === undefined || postsState.posts.size === 0) {
-      fetchPosts();
+    if (!isFetchInProgress) {
+      if (postsState === undefined || postsState.posts.size === 0) {
+        fetchPosts();
+        return;
+      }
+
+      if (needToLoadMorePosts) {
+        fetchPosts();
+      }
     }
-  }, []);
+  }, [
+    postsState,
+    expectedPostsCount,
+    isFetchInProgress,
+    fetchPosts,
+    needToLoadMorePosts,
+  ]);
 
   const renderPosts = () =>
-    postsToRender.map((post) => <PostOverview key={post.id} post={post} />);
+    !!postsState &&
+    getPostsToRender(postsState.posts).map((post) => (
+      <PostOverview key={post.id} post={post} />
+    ));
 
-  const isMorePosts = () => {
-    if (!postsPayloadMetaInfo) return true;
-    if (!isLoadingPosts && !!postsState) {
-      const isMorePosts =
-        postsState.posts.size < postsPayloadMetaInfo.total_entries;
-      return isMorePosts;
-    }
-    return true;
+  const handleLoadPosts = () => {
+    setPageNumber(pageNumber + 1);
+    fetchPosts();
   };
 
   return (
     <div className="Posts">
       <div className="postsAndLoading">
         <div className="scrollContainer">{renderPosts()}</div>
-        {isLoadingPosts ? <h4>...Loading Posts</h4> : null}
+        {needToLoadMorePosts ? (
+          <h4 className={"flexColCenterHorizontally"}>...Loading Posts</h4>
+        ) : null}
       </div>
       {isMorePosts() ? (
         <button
           className="loadingButton"
-          onClick={fetchPosts}
-          disabled={isLoadingPosts}
+          onClick={handleLoadPosts}
+          disabled={isFetchInProgress}
         >
           Load more posts
         </button>

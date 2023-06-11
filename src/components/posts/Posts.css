@@ -15,7 +15,15 @@
       max-height: 400px;
       display: flex;
       flex-direction: column;
+      gap: var(--gap-m);
       overflow-y: scroll;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      -ms-overflow-style: none;
+      scrollbar-width: none;
     }
   }
 
@@ -24,10 +32,3 @@
     align-self: flex-end;
   }
 }
-
-/*
-  &::-webkit-scrollbar {
-    display: none;  Safari and Chrome 
-  }
-  -ms-overflow-style: none; Internet Explorer 10+ 
-  scrollbar-width: none;  Firefox */
