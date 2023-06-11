@@ -1,0 +1,31 @@
+.PostOverview {
+  cursor: pointer;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid grey;
+  padding: var(--padding-s);
+  border-radius: 4px;
+
+  .title {
+    color: var(--primary-font-color);
+    font-size: var(--font-size-XL);
+    font-weight: var(--font-weight-semi-bold);
+  }
+
+  .username {
+  }
+
+  .createdDate {
+  }
+
+  .body {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* number of lines to show */
+    line-clamp: 4;
+    -webkit-box-orient: vertical;
+  }
+}

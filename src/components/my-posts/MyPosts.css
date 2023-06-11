@@ -1,0 +1,6 @@
+.MyPosts {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: var(--padding-xxl);
+}

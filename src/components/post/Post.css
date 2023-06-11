@@ -1,6 +1,18 @@
 .Post {
   flex: 1;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+
+  .title {
+  }
+
+  .userName {
+  }
+
+  .createdDate {
+  }
+
+  .body {
+  }
 }
