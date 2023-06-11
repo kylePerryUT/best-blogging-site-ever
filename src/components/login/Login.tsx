@@ -1,8 +1,7 @@
 import React, { FC, useState } from "react";
 import "./Login.css";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Paths from "../../models/enums/paths";
-// import { axiosPrivate } from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
 import { useAxiosPrivateWithAuth } from "../../hooks/useAxiosPrivate";
 import useUser from "../../hooks/useUser";
@@ -11,14 +10,11 @@ const Login: FC = () => {
   const authContext = useAuth();
   const userContext = useUser();
   const navigate = useNavigate();
-  const location = useLocation();
   const axiosPrivateWithAuth = useAxiosPrivateWithAuth();
-  const from = location.state?.from?.pathname ?? "/";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleEmailChange = (event: any) => {
-    console.log(typeof event);
     setEmail(event.target.value);
   };
 
@@ -44,14 +40,13 @@ const Login: FC = () => {
         }
       )
       .then((response: any) => {
-        console.log(JSON.stringify(response));
         const accessToken: string = response.headers.authorization;
         authContext?.setAuth({ token: accessToken });
         userContext?.setUser({
           id: response.data.id,
           display_name: response.data.display_name,
         });
-        navigate(from, { replace: true });
+        navigate("/posts/my-posts", { replace: true });
       })
       .catch((error) => console.error(error));
     // Reset form fields
