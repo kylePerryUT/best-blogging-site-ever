@@ -9,7 +9,6 @@ const MyPosts: FC = () => {
 
   return (
     <div className="MyPosts">
-      <h2>My Posts Page</h2>
       <Posts filter={(post: Post) => post.user.id === userState?.user.id} />
     </div>
   );

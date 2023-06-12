@@ -4,8 +4,8 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: var(--gap-m);
   width: 512px;
+  gap: var(--gap-m);
   border: solid #716d61;
   border-top-width: 12px;
   border-bottom-width: 4px;
