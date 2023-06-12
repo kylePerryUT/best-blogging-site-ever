@@ -19,6 +19,10 @@ code {
   --primary-font-color: black;
   --secondary-font-color: gray;
 
+  --primary-bg-color: #fefae1;
+
+  --primary-border-color: #716d61;
+
   --font-size-default: 14px;
   --font-size-M: 16px;
   --font-size-L: 20px;
@@ -59,8 +63,16 @@ code {
   }
 
   .primaryButton {
-    display: flex;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    font-size: 24px;
+    font-family: "Amatic SC";
+    background-color: var(--primary-bg-color);
+    border: 1px solid var(--primary-border-color);
+    border-radius: 4px;
   }
 
   .iconButton {

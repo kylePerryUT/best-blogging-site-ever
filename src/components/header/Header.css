@@ -4,30 +4,29 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: 4px;
+  padding: var(--padding-m);
 
   .iconAndNavBtns {
     display: flex;
     flex-direction: row;
+    gap: var(--gap-m);
 
     .icon {
       padding: 12px;
     }
-  }
 
-  .navBtn {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 80px;
-    font-size: 24px;
+    .navBtns {
+      display: flex;
+      gap: var(--gap-m);
+      align-items: center;
+    }
   }
 
   .loginBtn {
-    padding: 4px;
-    margin: 8px;
-    border: 1px solid black;
-    border-radius: 4px;
+    margin-right: var(--margin-m);
+  }
+
+  .userBtn {
+    margin-right: var(--margin-m);
   }
 }

@@ -16,19 +16,30 @@ const Header: FC = () => {
         <div className="icon">
           <FaBlog />
         </div>
-        <div className="navBtn" onClick={() => navigate(Paths.POSTS)}>
-          Discover
-        </div>
-        <div className="navBtn" onClick={() => navigate(Paths.WRITE_POST)}>
-          Write
+        <div className="navBtns">
+          <div className="primaryButton" onClick={() => navigate(Paths.POSTS)}>
+            Discover
+          </div>
+          <div
+            className="primaryButton"
+            onClick={() => navigate(Paths.WRITE_POST)}
+          >
+            Write
+          </div>
         </div>
       </div>
       {!!username ? (
-        <div className="navBtn" onClick={() => navigate("/posts/my-posts")}>
+        <div
+          className="primaryButton userBtn"
+          onClick={() => navigate("/posts/my-posts")}
+        >
           {username}
         </div>
       ) : (
-        <div className="navBtn loginBtn" onClick={() => navigate(Paths.LOGIN)}>
+        <div
+          className="primaryButton loginBtn"
+          onClick={() => navigate(Paths.LOGIN)}
+        >
           Log in
         </div>
       )}

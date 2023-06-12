@@ -5,6 +5,7 @@ import PostOverview from "../post-overview/PostOverview";
 import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 import usePosts from "../../hooks/usePosts";
 import { PayloadMetaInfo } from "../../models/interfaces/payload-meta-info";
+import { ColorRing } from "react-loader-spinner";
 
 interface PostsProps {
   filter?: (post: Post) => boolean;
@@ -104,21 +105,34 @@ const Posts: FC<PostsProps> = ({ filter }) => {
 
   return (
     <div className="Posts">
-      <div className="postsAndLoading">
+      <div className="postsContainer">
         <div className="scrollContainer verticalScroll">{renderPosts()}</div>
-        {needToLoadMorePosts ? (
-          <h4 className={"flexColCenterHorizontally"}>...Loading Posts</h4>
-        ) : null}
       </div>
-      {isMorePosts() ? (
-        <button
-          className="loadingButton"
-          onClick={handleLoadPosts}
-          disabled={isFetchInProgress}
-        >
-          Load more posts
-        </button>
-      ) : null}
+      <div className="loading">
+        {isMorePosts() ? (
+          <button
+            className="loadingButton primaryButton"
+            onClick={handleLoadPosts}
+            disabled={isFetchInProgress}
+          >
+            {isFetchInProgress || needToLoadMorePosts ? (
+              <ColorRing
+                visible={true}
+                height="24"
+                width="24"
+                ariaLabel="blocks-loading"
+                colors={["#eeead9", "#eeead9", "#eeead9", "#eeead9", "#eeead9"]}
+              />
+            ) : (
+              "Load more posts"
+            )}
+          </button>
+        ) : (
+          <div className={"flexColCenterHorizontally postsLoaded"}>
+            All posts loaded
+          </div>
+        )}
+      </div>
     </div>
   );
 };
