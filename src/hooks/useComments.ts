@@ -16,7 +16,6 @@ export const useComments = (postId: number) => {
   const comments: Comment[] = useMemo(() => {
     // get the comments for this post
     return Array.from(commentsState?.comments.get(postId)?.values() ?? []);
-    // return Array.from(commentsState?.comments.values() ?? []).filter(comment => comment.);
   }, [commentsState, postId]);
 
   const isMoreComments = useMemo(() => {

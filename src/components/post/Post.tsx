@@ -35,13 +35,13 @@ const Post: FC = () => {
 
   const handleUpdatePost = async () => {
     const updateSuccess = await updatePost(postTitle, postBody);
-    if (updateSuccess) navigate(0);
+    // if (updateSuccess) navigate(0);
     setEditMode(false);
   };
 
   const handleDeletePost = async () => {
     const deleteSuccess = await deletePost();
-    if (deleteSuccess) navigate(0);
+    if (deleteSuccess) navigate("/");
   };
 
   useEffect(() => {
@@ -55,6 +55,26 @@ const Post: FC = () => {
       navigate("/");
     }
   }, []);
+
+  const renderEditAndDeleteBtns = () => {
+    if (
+      !!authState?.auth.token &&
+      !!userState?.user.id &&
+      !!post?.user.id &&
+      userState.user.id === post.user.id
+    ) {
+      return (
+        <div className="editAndDeleteBtns">
+          {editMode ? (
+            <AiOutlineSave className="iconButton" onClick={handleUpdatePost} />
+          ) : (
+            <AiOutlineEdit className="iconButton" onClick={handleEditPost} />
+          )}
+          <AiOutlineDelete className="iconButton" onClick={handleDeletePost} />
+        </div>
+      );
+    }
+  };
 
   return (
     <div className="Post">
@@ -82,28 +102,7 @@ const Post: FC = () => {
           className="iconButton"
           onClick={() => setShowComments(!showComments)}
         />
-        {!!authState?.auth.token &&
-          !!userState?.user.id &&
-          !!post?.user.id &&
-          userState.user.id === post.user.id && (
-            <div className="editAndDeleteBtns">
-              {editMode ? (
-                <AiOutlineSave
-                  className="iconButton"
-                  onClick={handleUpdatePost}
-                />
-              ) : (
-                <AiOutlineEdit
-                  className="iconButton"
-                  onClick={handleEditPost}
-                />
-              )}
-              <AiOutlineDelete
-                className="iconButton"
-                onClick={handleDeletePost}
-              />
-            </div>
-          )}
+        {renderEditAndDeleteBtns()}
       </div>
       {showComments && <Comments postId={postIdNum} />}
     </div>

@@ -52,20 +52,20 @@
     font-weight: 600;
   }
 
-  .postFooter {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-
-    .editAndDeleteBtns {
-      align-self: flex-end;
-      display: flex;
-      gap: var(--gap-m);
-    }
-  }
-
   .comments {
     display: flex;
     flex-direction: column;
+  }
+}
+
+.postFooter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .editAndDeleteBtns {
+    align-self: flex-end;
+    display: flex;
+    gap: var(--gap-m);
   }
 }
