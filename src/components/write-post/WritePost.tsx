@@ -39,32 +39,35 @@ const WritePost: FC = () => {
   };
   return (
     <div className="WritePost">
-      Write Post Page
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="title">Title:</label>
+      <form onSubmit={handleSubmit} className="writePostForm">
+        <div className="input">
+          <label htmlFor="title">Title:</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            value={post.title}
+            onChange={handleTitleChange}
+            required
+          />
+        </div>
+        <div className="input">
+          <label htmlFor="body">Body:</label>
+          <textarea
+            id="body"
+            name="body"
+            value={post.body}
+            onChange={handleBodyChange}
+            rows={4}
+            cols={50}
+            required
+          ></textarea>
+        </div>
         <input
-          type="text"
-          id="title"
-          name="title"
-          value={post.title}
-          onChange={handleTitleChange}
-          required
+          type="submit"
+          value="Post"
+          className="primaryButton postButton"
         />
-        <br />
-        <br />
-        <label htmlFor="body">Body:</label>
-        <textarea
-          id="body"
-          name="body"
-          value={post.body}
-          onChange={handleBodyChange}
-          rows={4}
-          cols={50}
-          required
-        ></textarea>
-        <br />
-        <br />
-        <input type="submit" value="Post" />
       </form>
     </div>
   );

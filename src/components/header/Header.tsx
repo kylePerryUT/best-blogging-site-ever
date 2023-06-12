@@ -29,11 +29,16 @@ const Header: FC = () => {
         </div>
       </div>
       {!!username ? (
-        <div
-          className="primaryButton userBtn"
-          onClick={() => navigate("/posts/my-posts")}
-        >
-          {username}
+        <div className="loggedInBtns">
+          <div
+            className="primaryButton"
+            onClick={() => navigate("/posts/my-posts")}
+          >
+            {username}
+          </div>
+          <div className="primaryButton" onClick={() => navigate(0)}>
+            Logout
+          </div>
         </div>
       ) : (
         <div

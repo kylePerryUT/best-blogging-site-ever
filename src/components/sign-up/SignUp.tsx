@@ -80,89 +80,93 @@ const SignUpForm: FC = () => {
 
   return (
     <div className="SignUp">
-      <h2>Sign Up</h2>
       <form className="form" onSubmit={handleSignUp}>
-        <label htmlFor="username">
-          Username:
-          {username.length > 0 && validUsername ? <FcCheckmark /> : null}
-          {username.length > 0 && !validUsername ? <FcCancel /> : null}
-        </label>
-        <input
-          type="text"
-          id="username"
-          autoComplete="off"
-          value={username}
-          required
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        {username.length > 0 && !validUsername ? (
-          <span className="inputInfo">
-            <FaInfoCircle /> This field can not be left blank.
-          </span>
-        ) : null}
-
-        <label htmlFor="email">
-          Email:
-          {email.length > 0 && validEmail ? <FcCheckmark /> : null}
-          {email.length > 0 && !validEmail ? <FcCancel /> : null}
-        </label>
-        <input
-          type="email"
-          id="email"
-          autoComplete="off"
-          value={email}
-          required
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        {email.length > 0 && !validEmail ? (
-          <span className="inputInfo">
-            <FaInfoCircle /> Please enter a valid email.
-          </span>
-        ) : null}
-
-        <label htmlFor="password">
-          Password:
-          {password.length > 0 && validPassword ? <FcCheckmark /> : null}
-          {password.length > 0 && !validPassword ? <FcCancel /> : null}
-        </label>
-        <input
-          type="password"
-          id="password"
-          autoComplete="off"
-          value={password}
-          required
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        {password.length > 0 && !validPassword ? (
-          <span className="inputInfo">
-            <FaInfoCircle /> Password must be atleast 6 characters.
-          </span>
-        ) : null}
-
-        <label htmlFor="passwordMatch">
-          Confirm password:
-          {passwordMatch.length > 0 && validPasswordMatch ? (
-            <FcCheckmark />
+        <div>
+          <label htmlFor="username">
+            Username:
+            {username.length > 0 && validUsername ? <FcCheckmark /> : null}
+            {username.length > 0 && !validUsername ? <FcCancel /> : null}
+          </label>
+          <input
+            type="text"
+            id="username"
+            autoComplete="off"
+            value={username}
+            required
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          {username.length > 0 && !validUsername ? (
+            <span className="inputInfo">
+              <FaInfoCircle /> This field can not be left blank.
+            </span>
           ) : null}
+        </div>
+        <div>
+          <label htmlFor="email">
+            Email:
+            {email.length > 0 && validEmail ? <FcCheckmark /> : null}
+            {email.length > 0 && !validEmail ? <FcCancel /> : null}
+          </label>
+          <input
+            type="email"
+            id="email"
+            autoComplete="off"
+            value={email}
+            required
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          {email.length > 0 && !validEmail ? (
+            <span className="inputInfo">
+              <FaInfoCircle /> Please enter a valid email.
+            </span>
+          ) : null}
+        </div>
+        <div>
+          <label htmlFor="password">
+            Password:
+            {password.length > 0 && validPassword ? <FcCheckmark /> : null}
+            {password.length > 0 && !validPassword ? <FcCancel /> : null}
+          </label>
+          <input
+            type="password"
+            id="password"
+            autoComplete="off"
+            value={password}
+            required
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          {password.length > 0 && !validPassword ? (
+            <span className="inputInfo">
+              <FaInfoCircle /> Password must be atleast 6 characters.
+            </span>
+          ) : null}
+        </div>
+        <div>
+          <label htmlFor="passwordMatch">
+            Confirm password:
+            {passwordMatch.length > 0 && validPasswordMatch ? (
+              <FcCheckmark />
+            ) : null}
+            {passwordMatch.length > 0 && !validPasswordMatch ? (
+              <FcCancel />
+            ) : null}
+          </label>
+          <input
+            type="password"
+            id="passwordMatch"
+            autoComplete="off"
+            value={passwordMatch}
+            required
+            onChange={(e) => setPasswordMatch(e.target.value)}
+          />
           {passwordMatch.length > 0 && !validPasswordMatch ? (
-            <FcCancel />
+            <span className="inputInfo">
+              <FaInfoCircle /> Passwords must match.
+            </span>
           ) : null}
-        </label>
-        <input
-          type="password"
-          id="passwordMatch"
-          autoComplete="off"
-          value={passwordMatch}
-          required
-          onChange={(e) => setPasswordMatch(e.target.value)}
-        />
-        {passwordMatch.length > 0 && !validPasswordMatch ? (
-          <span className="inputInfo">
-            <FaInfoCircle /> Passwords must match.
-          </span>
-        ) : null}
-
+        </div>
         <button
+          className="primaryButton signUpBtn"
           type="submit"
           disabled={
             !validUsername ||
@@ -175,7 +179,7 @@ const SignUpForm: FC = () => {
         </button>
       </form>
 
-      <p>
+      <p className="loginText">
         Already have an account?{" "}
         <span className="textBtn" onClick={() => navigate(Paths.LOGIN)}>
           Log in

@@ -78,14 +78,14 @@ const Login: FC = () => {
               onChange={handlePasswordChange}
             />
           </div>
-          <button type="submit">Log In</button>
-          <div>
-            <p>
-              Don't have an account?
-              <span className="textBtn" onClick={() => navigate(Paths.SIGN_UP)}>
-                Sign up
-              </span>
-            </p>
+          <button type="submit" className="primaryButton loginButton">
+            Log In
+          </button>
+          <div className="signupText">
+            Don't have an account?
+            <span className="textBtn" onClick={() => navigate(Paths.SIGN_UP)}>
+              Sign up
+            </span>
           </div>
         </form>
       </div>
