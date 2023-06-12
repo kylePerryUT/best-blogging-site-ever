@@ -76,7 +76,21 @@ export const useComments = (postId: number) => {
           comment: { post_id: postId, content: commentBody },
         })
       )
-      .then((response) => console.log(response.data))
+      .then((response) => {
+        // update the local comments state to be able to see
+        //  the comment without refreshing the app
+        if (!!commentsState) {
+          const newComment: Comment = response.data.comment;
+          const postsUpdatedComments =
+            new Map(commentsState.comments).get(postId) ??
+            new Map<number, Comment>();
+          postsUpdatedComments.set(newComment.id, newComment);
+          const updatedCommentsMap = new Map(commentsState.comments);
+          updatedCommentsMap.set(postId, postsUpdatedComments);
+          commentsState.setComments(updatedCommentsMap);
+        }
+        console.log(response.data);
+      })
       .catch((err) => console.error(err));
   }, []);
 
