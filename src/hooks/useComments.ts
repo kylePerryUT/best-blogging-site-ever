@@ -14,8 +14,10 @@ export const useComments = (postId: number) => {
   const commentsState = useContext(AppContext)?.appState.commentsState;
 
   const comments: Comment[] = useMemo(() => {
-    return Array.from(commentsState?.comments.values() ?? []);
-  }, [commentsState]);
+    // get the comments for this post
+    return Array.from(commentsState?.comments.get(postId)?.values() ?? []);
+    // return Array.from(commentsState?.comments.values() ?? []).filter(comment => comment.);
+  }, [commentsState, postId]);
 
   const isMoreComments = useMemo(() => {
     if (!commentsPayloadMetaInfo) return true;
@@ -43,12 +45,16 @@ export const useComments = (postId: number) => {
         .then((response) => {
           if (!!commentsState) {
             const commentsMap = new Map<number, Comment>(
-              commentsState.comments
+              commentsState.comments.get(postId)
             );
             response.data.comments.forEach((comment: Comment) =>
               commentsMap.set(comment.id, comment)
             );
-            commentsState.setComments(commentsMap);
+            const updatedCommentsMap = new Map(commentsState.comments).set(
+              postId,
+              commentsMap
+            );
+            commentsState.setComments(updatedCommentsMap);
             setCommentsPayloadMetaInfo({ ...response.data.meta });
           }
         })

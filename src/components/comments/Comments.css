@@ -1,3 +1,15 @@
 .Comments {
+  max-height: 152px;
+  overflow-y: hidden;
   display: flex;
+  flex-direction: column;
+
+  .commentsBox {
+    padding: var(--padding-m);
+    border-radius: 4px;
+    border: 1px solid #716d61;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-m);
+  }
 }

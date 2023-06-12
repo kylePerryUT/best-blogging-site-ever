@@ -16,6 +16,9 @@
   box-shadow: 0 0 5px 5px rgba(113, 109, 97, 0.5);
   overflow: hidden;
 
+  input {
+  }
+
   .header {
     display: flex;
     flex-direction: row;
@@ -24,8 +27,11 @@
     .metaInfo {
       display: flex;
       flex-direction: column;
+      align-items: stretch;
 
       .title {
+        display: flex;
+        width: 100%;
         font-size: 32px;
         font-weight: 800;
       }
@@ -46,8 +52,9 @@
     font-weight: 600;
   }
 
-  .footer {
+  .postFooter {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
 
     .editAndDeleteBtns {

@@ -15,9 +15,11 @@ const Comments: FC<CommentsProps> = ({ postId }) => {
     comments.map((comment) => <Comment key={comment.id} comment={comment} />);
 
   return (
-    <div className="flexColumnCenterHorizontally">
+    <div className="Comments">
       <WriteComment onPostComment={handlePostComment} />
-      <div className="comments">{renderComments()}</div>
+      <div className="verticalScroll commentsBox">
+        {comments.length === 0 ? <div>No comments yet</div> : renderComments()}
+      </div>
     </div>
   );
 };
