@@ -1,7 +1,7 @@
 .Posts {
-  flex: 1;
   display: flex;
   flex-direction: column;
+  position: relative;
   max-width: 512px;
   gap: var(--gap-m);
 
@@ -12,18 +12,11 @@
     overflow: hidden;
 
     .scrollContainer {
-      max-height: 400px;
+      /* TODO: figure out how to make this responseive */
+      max-height: 512px;
       display: flex;
       flex-direction: column;
       gap: var(--gap-m);
-      overflow-y: scroll;
-
-      &::-webkit-scrollbar {
-        display: none;
-      }
-
-      -ms-overflow-style: none;
-      scrollbar-width: none;
     }
   }
 

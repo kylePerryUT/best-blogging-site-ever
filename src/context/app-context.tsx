@@ -2,6 +2,7 @@ import React, { createContext, useState, FC, ReactNode } from "react";
 import { User } from "../models/interfaces/user";
 import { Authentication } from "../models/interfaces/authentication";
 import { Post } from "../models/interfaces/post";
+import { Comment } from "../models/interfaces/comment";
 
 interface AuthState {
   auth: Authentication;
@@ -30,11 +31,16 @@ interface PostsState {
 const POSTS_DEFAULT_STATE: Map<number, Post> = new Map<number, Post>();
 
 interface CommentsState {
-  comments: Comment[];
-  setComments: React.Dispatch<React.SetStateAction<Comment[]>>;
+  comments: Map<number, Map<number, Comment>>;
+  setComments: React.Dispatch<
+    React.SetStateAction<Map<number, Map<number, Comment>>>
+  >;
 }
 
-const COMMENTS_DEFAULT_STATE: Comment[] = [];
+const COMMENTS_DEFAULT_STATE: Map<number, Map<number, Comment>> = new Map<
+  number,
+  Map<number, Comment>
+>();
 
 interface AppState {
   authState: AuthState;
@@ -54,7 +60,10 @@ export const AppContextProvider: FC<AppProviderProps> = ({ children }) => {
   const [auth, setAuth] = useState<Authentication>(AUTH_DEFAULT_STATE);
   const [user, setUser] = useState<User>(USER_DEFAULT_STATE);
   const [posts, setPosts] = useState<Map<number, Post>>(POSTS_DEFAULT_STATE);
-  const [comments, setComments] = useState<Comment[]>(COMMENTS_DEFAULT_STATE);
+  // map<postId, map<commentId, comment>>
+  const [comments, setComments] = useState<Map<number, Map<number, Comment>>>(
+    COMMENTS_DEFAULT_STATE
+  );
 
   return (
     <AppContext.Provider

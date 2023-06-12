@@ -1,11 +1,9 @@
 import { User } from "./user";
 
-export interface Post {
+export interface Comment {
   id: number;
-  title: string;
-  body: string;
+  content: string;
   created_at: string;
   updated_at: string;
-  comment_count: number;
   user: User;
 }

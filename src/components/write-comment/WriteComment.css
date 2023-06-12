@@ -1,0 +1,20 @@
+.WriteComment {
+  .commentForm {
+    display: flex;
+    flex-direction: column;
+
+    .commentInput {
+      flex: 1;
+      font-size: 20px;
+      font-family: "Amatic SC";
+    }
+
+    .postButton {
+      align-self: flex-end;
+    }
+
+    .loginText {
+      font-size: 20px;
+    }
+  }
+}
