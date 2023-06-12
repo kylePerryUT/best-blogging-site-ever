@@ -9,6 +9,8 @@
     gap: 8px;
 
     & label {
+      font-weight: var(--font-weight-semi-bold);
+      font-size: 24px;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -21,11 +23,22 @@
       gap: 4px;
       font-size: 12px;
     }
+
+    .signUpBtn {
+      display: flex;
+      align-self: flex-end;
+    }
   }
 
-  .textBtn {
-    cursor: pointer;
-    font-style: italic;
-    text-decoration: underline;
+  .loginText {
+    margin-top: var(--margin-xxl);
+    font-size: 16px;
+    font-weight: var(--font-weight-semi-bold);
+
+    .textBtn {
+      cursor: pointer;
+      font-style: italic;
+      text-decoration: underline;
+    }
   }
 }
