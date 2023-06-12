@@ -29,7 +29,7 @@ const WriteComment: FC<WriteCommentProps> = ({ onPostComment }) => {
             className="primaryButton postButton"
             onClick={() => onPostComment(comment)}
           >
-            Post
+            Comment
           </div>
         </form>
       )}

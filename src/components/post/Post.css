@@ -16,24 +16,22 @@
   box-shadow: 0 0 5px 5px rgba(113, 109, 97, 0.5);
   overflow: hidden;
 
-  input {
-  }
-
   .header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 
     .metaInfo {
+      flex: 1;
       display: flex;
       flex-direction: column;
       align-items: stretch;
 
       .title {
-        display: flex;
-        width: 100%;
-        font-size: 32px;
-        font-weight: 800;
+        flex: 1;
+        font-size: 24px;
+        font-weight: 600;
+        font-family: "Amatic SC";
       }
 
       .createdDate {
@@ -50,6 +48,7 @@
     /* max-height: 256px; */
     font-size: 24px;
     font-weight: 600;
+    font-family: "Amatic SC";
   }
 
   .comments {

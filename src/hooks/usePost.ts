@@ -53,7 +53,6 @@ const usePost = (postId: number) => {
         // update the post in the local state so we can see the updated
         //  version without having to refresh the app
         if (!!postsState) {
-          debugger;
           const updatedPost: Post = response.data.post;
           const updatedPostsState = postsState.posts;
           updatedPostsState.set(postId, updatedPost);

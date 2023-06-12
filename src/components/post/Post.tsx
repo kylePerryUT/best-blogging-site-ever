@@ -10,6 +10,7 @@ import { FaRegComments } from "react-icons/fa";
 import usePost from "../../hooks/usePost";
 import useAuth from "../../hooks/useAuth";
 import useUser from "../../hooks/useUser";
+import { ColorRing } from "react-loader-spinner";
 
 const Post: FC = () => {
   const navigate = useNavigate();
@@ -56,6 +57,40 @@ const Post: FC = () => {
     }
   }, []);
 
+  const renderEditBtn = () =>
+    editMode ? (
+      updatingPost ? (
+        <ColorRing
+          visible={true}
+          height="24"
+          width="24"
+          ariaLabel="blocks-loading"
+          // wrapperStyle={{}}
+          // wrapperClass="blocks-wrapper"
+          colors={["#eeead9", "#eeead9", "#eeead9", "#eeead9", "#eeead9"]}
+        />
+      ) : (
+        <AiOutlineSave className="iconButton" onClick={handleUpdatePost} />
+      )
+    ) : (
+      <AiOutlineEdit className="iconButton" onClick={handleEditPost} />
+    );
+
+  const renderDeleteBtn = () =>
+    deletingPost ? (
+      <ColorRing
+        visible={true}
+        height="24"
+        width="24"
+        ariaLabel="blocks-loading"
+        // wrapperStyle={{}}
+        // wrapperClass="blocks-wrapper"
+        colors={["#eeead9", "#eeead9", "#eeead9", "#eeead9", "#eeead9"]}
+      />
+    ) : (
+      <AiOutlineDelete className="iconButton" onClick={handleDeletePost} />
+    );
+
   const renderEditAndDeleteBtns = () => {
     if (
       !!authState?.auth.token &&
@@ -65,12 +100,8 @@ const Post: FC = () => {
     ) {
       return (
         <div className="editAndDeleteBtns">
-          {editMode ? (
-            <AiOutlineSave className="iconButton" onClick={handleUpdatePost} />
-          ) : (
-            <AiOutlineEdit className="iconButton" onClick={handleEditPost} />
-          )}
-          <AiOutlineDelete className="iconButton" onClick={handleDeletePost} />
+          {renderEditBtn()}
+          {renderDeleteBtn()}
         </div>
       );
     }
@@ -83,6 +114,7 @@ const Post: FC = () => {
           <input
             className="title"
             type="text"
+            disabled={!editMode}
             value={postTitle}
             onChange={(event) => setPostTitle(event.target.value)}
           />
@@ -94,6 +126,7 @@ const Post: FC = () => {
       </div>
       <textarea
         className="postBody verticalScroll"
+        disabled={!editMode}
         value={postBody}
         onChange={(event) => setPostBody(event.target.value)}
       />
