@@ -26,7 +26,10 @@
     margin-right: var(--margin-m);
   }
 
-  .userBtn {
+  .loggedInBtns {
+    display: flex;
+    flex-direction: row;
+    gap: var(--gap-m);
     margin-right: var(--margin-m);
   }
 }
