@@ -1,8 +1,9 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  /* font-family: " Amatic SC"; */
+  font-family: "Amatic SC", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -49,6 +50,31 @@ code {
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  .flexRowCenterAlignVertically {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-m);
+  }
+
+  .primaryButton {
+    display: flex;
+    cursor: pointer;
+  }
+
+  .iconButton {
+    cursor: pointer;
+  }
+
+  .verticalScroll {
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 
   /* --default-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
