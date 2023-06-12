@@ -1,18 +1,70 @@
 .Post {
+  padding: var(--padding-m);
+  margin-bottom: var(--margin-xxl);
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: var(--gap-m);
+  width: 512px;
+  border: solid #716d61;
+  border-top-width: 12px;
+  border-bottom-width: 4px;
+  border-left-width: 4px;
+  border-right-width: 4px;
+  border-radius: 4px;
+  background-color: #fefae1;
+  box-shadow: 0 0 5px 5px rgba(113, 109, 97, 0.5);
+  overflow: hidden;
 
-  .title {
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .metaInfo {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+
+      .title {
+        flex: 1;
+        font-size: 24px;
+        font-weight: 600;
+        font-family: "Amatic SC";
+      }
+
+      .createdDate {
+        font-size: 24px;
+      }
+
+      .userName {
+        font-size: 24px;
+      }
+    }
   }
 
-  .userName {
+  .postBody {
+    /* max-height: 256px; */
+    font-size: 24px;
+    font-weight: 600;
+    font-family: "Amatic SC";
   }
 
-  .createdDate {
+  .comments {
+    display: flex;
+    flex-direction: column;
   }
+}
 
-  .body {
+.postFooter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .editAndDeleteBtns {
+    align-self: flex-end;
+    display: flex;
+    gap: var(--gap-m);
   }
 }

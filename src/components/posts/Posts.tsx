@@ -4,15 +4,10 @@ import { Post } from "../../models/interfaces/post";
 import PostOverview from "../post-overview/PostOverview";
 import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 import usePosts from "../../hooks/usePosts";
+import { PayloadMetaInfo } from "../../models/interfaces/payload-meta-info";
 
 interface PostsProps {
   filter?: (post: Post) => boolean;
-}
-
-interface PostsPayloadMetaInfo {
-  current_page: number;
-  per_page: number;
-  total_entries: number;
 }
 
 const Posts: FC<PostsProps> = ({ filter }) => {
@@ -20,7 +15,7 @@ const Posts: FC<PostsProps> = ({ filter }) => {
   const [pageNumber, setPageNumber] = useState<number>(1);
   const expectedPostsCount = PAGE_SIZE * pageNumber;
   const [postsPayloadMetaInfo, setPostsPayloadMetaInfo] =
-    useState<PostsPayloadMetaInfo | null>();
+    useState<PayloadMetaInfo | null>();
   const [isFetchInProgress, setIsFetchInProgress] = useState<boolean>(false);
 
   const axiosPrivate = useAxiosPrivate();
@@ -94,13 +89,7 @@ const Posts: FC<PostsProps> = ({ filter }) => {
         fetchPosts();
       }
     }
-  }, [
-    postsState,
-    expectedPostsCount,
-    isFetchInProgress,
-    fetchPosts,
-    needToLoadMorePosts,
-  ]);
+  }, [isFetchInProgress]);
 
   const renderPosts = () =>
     !!postsState &&
@@ -116,7 +105,7 @@ const Posts: FC<PostsProps> = ({ filter }) => {
   return (
     <div className="Posts">
       <div className="postsAndLoading">
-        <div className="scrollContainer">{renderPosts()}</div>
+        <div className="scrollContainer verticalScroll">{renderPosts()}</div>
         {needToLoadMorePosts ? (
           <h4 className={"flexColCenterHorizontally"}>...Loading Posts</h4>
         ) : null}

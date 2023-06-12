@@ -1,0 +1,16 @@
+.Comment {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: var(--padding-m);
+  border-bottom: 1px dashed #716d61;
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .body {
+    display: flex;
+  }
+}

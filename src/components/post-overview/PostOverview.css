@@ -12,6 +12,12 @@
     color: var(--primary-font-color);
     font-size: var(--font-size-XL);
     font-weight: var(--font-weight-semi-bold);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* number of lines to show */
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
   }
 
   .username {
