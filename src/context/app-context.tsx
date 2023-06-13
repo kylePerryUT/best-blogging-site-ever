@@ -3,6 +3,7 @@ import { User } from "../models/interfaces/user";
 import { Authentication } from "../models/interfaces/authentication";
 import { Post } from "../models/interfaces/post";
 import { Comment } from "../models/interfaces/comment";
+import { PayloadMetaInfo } from "../models/interfaces/payload-meta-info";
 
 interface AuthState {
   auth: Authentication;
@@ -26,9 +27,18 @@ const USER_DEFAULT_STATE: User = {
 interface PostsState {
   posts: Map<number, Post>;
   setPosts: React.Dispatch<React.SetStateAction<Map<number, Post>>>;
+  postsPayloadMetaInfo: PayloadMetaInfo;
+  setPostsPayloadMetaInfo: React.Dispatch<
+    React.SetStateAction<PayloadMetaInfo>
+  >;
 }
 
 const POSTS_DEFAULT_STATE: Map<number, Post> = new Map<number, Post>();
+const POSTS_PAYLOAD_META_INFO_DEFAULT_STATE: PayloadMetaInfo = {
+  current_page: null,
+  per_page: null,
+  total_entries: null,
+};
 
 interface CommentsState {
   comments: Map<number, Map<number, Comment>>;
@@ -60,6 +70,8 @@ export const AppContextProvider: FC<AppProviderProps> = ({ children }) => {
   const [auth, setAuth] = useState<Authentication>(AUTH_DEFAULT_STATE);
   const [user, setUser] = useState<User>(USER_DEFAULT_STATE);
   const [posts, setPosts] = useState<Map<number, Post>>(POSTS_DEFAULT_STATE);
+  const [postsPayloadMetaInfo, setPostsPayloadMetaInfo] =
+    useState<PayloadMetaInfo>(POSTS_PAYLOAD_META_INFO_DEFAULT_STATE);
   // map<postId, map<commentId, comment>>
   const [comments, setComments] = useState<Map<number, Map<number, Comment>>>(
     COMMENTS_DEFAULT_STATE
@@ -71,7 +83,12 @@ export const AppContextProvider: FC<AppProviderProps> = ({ children }) => {
         appState: {
           authState: { auth, setAuth },
           userState: { user, setUser },
-          postsState: { posts, setPosts },
+          postsState: {
+            posts,
+            setPosts,
+            postsPayloadMetaInfo,
+            setPostsPayloadMetaInfo,
+          },
           commentsState: { comments, setComments },
         },
       }}

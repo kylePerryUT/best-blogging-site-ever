@@ -6,7 +6,7 @@ import { Post } from "../models/interfaces/post";
 const usePost = (postId: number) => {
   const [updatingPost, setUpdatingPost] = useState<boolean>(false);
   const [deletingPost, setDeletingPost] = useState<boolean>(false);
-  const postsState = usePosts();
+  const { postsState } = usePosts();
 
   const axiosWithAuth = useAxiosPrivateWithAuth();
 
