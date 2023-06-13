@@ -1,5 +1,5 @@
 export interface PayloadMetaInfo {
-  current_page: number;
-  per_page: number;
-  total_entries: number;
+  current_page: number | null;
+  per_page: number | null;
+  total_entries: number | null;
 }

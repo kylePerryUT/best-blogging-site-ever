@@ -19,17 +19,21 @@ export const useComments = (postId: number) => {
   }, [commentsState, postId]);
 
   const isMoreComments = useMemo(() => {
-    if (!commentsPayloadMetaInfo) return true;
-    if (!!comments) {
-      const isMorePosts =
-        comments.length < commentsPayloadMetaInfo.total_entries;
-      return isMorePosts;
-    }
-    return true;
+    if (
+      !commentsPayloadMetaInfo ||
+      !commentsPayloadMetaInfo.total_entries ||
+      !comments
+    )
+      return true;
+
+    const isMorePosts = comments.length < commentsPayloadMetaInfo.total_entries;
+    return isMorePosts;
   }, [commentsPayloadMetaInfo, comments]);
 
-  const getNextPageNumber = (currentPageNumber: number | undefined) =>
-    currentPageNumber === undefined ? 1 : currentPageNumber + 1;
+  const getNextPageNumber = (currentPageNumber: number | undefined | null) =>
+    currentPageNumber === undefined || currentPageNumber === null
+      ? 1
+      : currentPageNumber + 1;
 
   const fetchNextCommentPage = useCallback(async () => {
     // Don't make a call to load more posts if were already loading some

@@ -16,7 +16,7 @@ const Post: FC = () => {
   const navigate = useNavigate();
   const authState = useAuth();
   const userState = useUser();
-  const postsState = usePosts();
+  const { postsState } = usePosts();
   const { postId } = useParams();
   const postIdNum = useMemo(() => {
     return Number.parseInt(postId ?? "");
@@ -35,8 +35,7 @@ const Post: FC = () => {
   };
 
   const handleUpdatePost = async () => {
-    const updateSuccess = await updatePost(postTitle, postBody);
-    // if (updateSuccess) navigate(0);
+    await updatePost(postTitle, postBody);
     setEditMode(false);
   };
 
