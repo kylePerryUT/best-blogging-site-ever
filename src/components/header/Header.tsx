@@ -16,38 +16,43 @@ const Header: FC = () => {
         <div className="icon">
           <FaBlog />
         </div>
-        <div className="navBtns">
-          <div className="primaryButton" onClick={() => navigate(Paths.POSTS)}>
-            Discover
+        <div className="headerButtons">
+          <div className="navBtns">
+            <div
+              className="primaryButton"
+              onClick={() => navigate(Paths.POSTS)}
+            >
+              Discover
+            </div>
+            <div
+              className="primaryButton"
+              onClick={() => navigate(Paths.WRITE_POST)}
+            >
+              Write
+            </div>
           </div>
-          <div
-            className="primaryButton"
-            onClick={() => navigate(Paths.WRITE_POST)}
-          >
-            Write
-          </div>
+          {!!username ? (
+            <div className="loggedInBtns">
+              <div
+                className="primaryButton"
+                onClick={() => navigate("/posts/my-posts")}
+              >
+                {username}
+              </div>
+              <div className="primaryButton" onClick={() => navigate(0)}>
+                Logout
+              </div>
+            </div>
+          ) : (
+            <div
+              className="primaryButton loginBtn"
+              onClick={() => navigate(Paths.LOGIN)}
+            >
+              Log in
+            </div>
+          )}
         </div>
       </div>
-      {!!username ? (
-        <div className="loggedInBtns">
-          <div
-            className="primaryButton"
-            onClick={() => navigate("/posts/my-posts")}
-          >
-            {username}
-          </div>
-          <div className="primaryButton" onClick={() => navigate(0)}>
-            Logout
-          </div>
-        </div>
-      ) : (
-        <div
-          className="primaryButton loginBtn"
-          onClick={() => navigate(Paths.LOGIN)}
-        >
-          Log in
-        </div>
-      )}
     </div>
   );
 };

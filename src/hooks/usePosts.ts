@@ -1,7 +1,6 @@
 import { useCallback, useContext, useMemo, useState } from "react";
 import AppContext from "../context/app-context";
 import { Post } from "../models/interfaces/post";
-import { PayloadMetaInfo } from "../models/interfaces/payload-meta-info";
 import { useAxiosPrivate } from "./useAxiosPrivate";
 
 const usePosts = (filter?: (post: Post) => boolean) => {

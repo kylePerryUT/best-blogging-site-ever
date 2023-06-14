@@ -1,10 +1,10 @@
 .Post {
+  width: 512px;
   padding: var(--padding-m);
   margin-bottom: var(--margin-xxl);
   flex: 1;
   display: flex;
   flex-direction: column;
-  width: 512px;
   gap: var(--gap-m);
   border: solid #716d61;
   border-top-width: 12px;
@@ -75,5 +75,11 @@
     align-self: flex-end;
     display: flex;
     gap: var(--gap-m);
+  }
+}
+
+@media (max-width: 600px) {
+  .Post {
+    width: 256px;
   }
 }

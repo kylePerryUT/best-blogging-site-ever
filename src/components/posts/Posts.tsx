@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect } from "react";
 import "./Posts.css";
 import { Post } from "../../models/interfaces/post";
 import PostOverview from "../post-overview/PostOverview";
@@ -10,7 +10,6 @@ interface PostsProps {
 }
 
 const Posts: FC<PostsProps> = ({ filter }) => {
-  // const [page, setPage] = useState<number>(0);
   const {
     loading,
     getFilteredPosts,

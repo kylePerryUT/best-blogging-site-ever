@@ -7,6 +7,7 @@
   padding: var(--padding-m);
 
   .iconAndNavBtns {
+    flex: 1;
     display: flex;
     flex-direction: row;
     gap: var(--gap-m);
@@ -15,21 +16,45 @@
       padding: 12px;
     }
 
-    .navBtns {
+    .headerButtons {
+      flex: 1;
       display: flex;
-      gap: var(--gap-m);
+      justify-content: space-between;
       align-items: center;
+
+      .navBtns {
+        display: flex;
+        gap: var(--gap-m);
+      }
+
+      .loginBtn {
+        margin-right: var(--margin-m);
+      }
+
+      .loggedInBtns {
+        display: flex;
+        flex-direction: row;
+        gap: var(--gap-m);
+        margin-right: var(--margin-m);
+      }
     }
   }
+}
 
-  .loginBtn {
-    margin-right: var(--margin-m);
-  }
-
-  .loggedInBtns {
-    display: flex;
-    flex-direction: row;
-    gap: var(--gap-m);
-    margin-right: var(--margin-m);
+@media (max-width: 600px) {
+  .Header {
+    .iconAndNavBtns {
+      .headerButtons {
+        justify-content: initial;
+        .navBtns {
+          flex: 1;
+          justify-content: space-evenly;
+        }
+        .loggedInBtns {
+          flex: 1;
+          justify-content: space-evenly;
+        }
+      }
+    }
   }
 }
