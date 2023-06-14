@@ -67,7 +67,6 @@ const SignUpForm: FC = () => {
         }
       )
       .then((response) => {
-        console.log(JSON.stringify(response));
         navigate(Paths.MY_POSTS);
       })
       .catch((error) => console.error(error));
