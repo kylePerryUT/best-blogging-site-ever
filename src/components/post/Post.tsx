@@ -123,12 +123,14 @@ const Post: FC = () => {
           <div className="userName">Author: {post?.user.display_name}</div>
         </div>
       </div>
-      <textarea
-        className="postBody verticalScroll"
-        disabled={!editMode}
-        value={postBody}
-        onChange={(event) => setPostBody(event.target.value)}
-      />
+      <div className="postScrollContainer">
+        <textarea
+          className="postBody verticalScroll"
+          disabled={!editMode}
+          value={postBody}
+          onChange={(event) => setPostBody(event.target.value)}
+        />
+      </div>
       <div className="postFooter">
         <FaRegComments
           className="iconButton"

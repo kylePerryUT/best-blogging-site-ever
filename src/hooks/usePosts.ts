@@ -22,42 +22,20 @@ const usePosts = (filter?: (post: Post) => boolean) => {
     []
   );
 
-  // const filteredPosts = useMemo(() => {
-  //   const postsMap = postsState?.posts ?? new Map();
-  //   let posts = !!postsMap ? Array.from(postsMap.values()) : [];
-  //   if (!!filter) posts = posts.filter(filter);
-  //   return posts;
-  // }, [filter, postsState]);
-
   const isMorePosts = useMemo(() => {
-    debugger;
     if (
       postsState?.postsPayloadMetaInfo === undefined ||
       postsState?.postsPayloadMetaInfo === null ||
       postsState.postsPayloadMetaInfo.total_entries === null ||
       postsState === undefined
     ) {
-      debugger;
       return true;
     }
 
     const morePosts =
       postsState.posts.size < postsState.postsPayloadMetaInfo.total_entries;
-    debugger;
-    console.log(morePosts);
     return morePosts;
   }, [postsState]);
-
-  // const needToLoadMorePosts = useCallback(
-  //   (nextPageNumber: number, filteredPosts: Post[], totalPostsCount: number) => {
-  //     debugger;
-  //     const shouldLoadeMore =
-  //       filteredPosts.length < expectedFilteredPostsCount(nextPageNumber);
-  //     debugger;
-  //     return shouldLoadeMore;
-  //   },
-  //   [postsState, filteredPosts, isMorePosts, expectedFilteredPostsCount]
-  // );
 
   const getUpdatedPostsMap = (
     existingPostsMap: Map<number, Post>,
@@ -77,13 +55,11 @@ const usePosts = (filter?: (post: Post) => boolean) => {
           },
         })
         .then((response) => {
-          debugger;
           const updatedPostsMap = getUpdatedPostsMap(
             postsState?.posts ?? new Map(),
             response.data.posts
           );
           postsState?.setPosts(updatedPostsMap);
-          debugger;
           postsState?.setPostsPayloadMetaInfo(response.data.meta);
 
           return response.data;
