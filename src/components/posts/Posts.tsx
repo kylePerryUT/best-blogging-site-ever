@@ -20,10 +20,7 @@ const Posts: FC<PostsProps> = ({ filter }) => {
   } = usePosts(filter);
 
   useEffect(() => {
-    // debugger;
-    // if (!loading) {
     handleLoadPosts();
-    // }
   }, []);
 
   const renderPosts = () =>

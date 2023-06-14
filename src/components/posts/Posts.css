@@ -1,4 +1,5 @@
 .Posts {
+  flex: 1;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -9,14 +10,19 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow-y: hidden;
+    position: relative;
 
     .scrollContainer {
-      /* TODO: figure out how to make this responseive */
-      max-height: 512px;
+      width: 100%;
       display: flex;
       flex-direction: column;
       gap: var(--gap-m);
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      right: 0;
     }
   }
 

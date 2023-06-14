@@ -23,8 +23,6 @@ const WritePost: FC = () => {
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     // Handle form submission logic here
-    console.log("Title:", post.title);
-    console.log("Body:", post.body);
     axiosWithAuth.post(
       "/posts",
       JSON.stringify({

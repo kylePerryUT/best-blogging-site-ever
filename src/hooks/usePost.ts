@@ -15,7 +15,6 @@ const usePost = (postId: number) => {
     return await axiosWithAuth
       .delete(`/posts/${postId}`)
       .then((response) => {
-        console.log("Successfully deleted post: ", response);
         // remove the post from the state so we can see it as "deleted"
         //  without having to refresh the app
         if (!!postsState) {
@@ -49,7 +48,6 @@ const usePost = (postId: number) => {
         })
       )
       .then((response) => {
-        console.log("Successfully updated post", response);
         // update the post in the local state so we can see the updated
         //  version without having to refresh the app
         if (!!postsState) {

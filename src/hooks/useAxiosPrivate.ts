@@ -13,13 +13,24 @@ export const useAxiosPrivateWithAuth = () => {
         config.headers["Authorization"] = `${authState?.auth.token}`;
         return config;
       },
-      (error) => Promise.reject(error)
+      (error) => {
+        console.log(
+          "logging error from axiosPrivateWithAuth requestInterceptor: ",
+          error
+        );
+        return Promise.reject(error);
+      }
     );
 
     const responseIntercept = axiosPrivate.interceptors.response.use(
       (response) => response,
-      async () => {
+      (error) => {
+        console.log(
+          "logging error from axiosPrivateWithAuth responseInterceptor: ",
+          error
+        );
         navigate("/");
+        return Promise.reject(error);
       }
     );
 

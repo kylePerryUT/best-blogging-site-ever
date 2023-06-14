@@ -4,12 +4,14 @@ import { axiosPrivate } from "../api/axios";
 import { PayloadMetaInfo } from "../models/interfaces/payload-meta-info";
 import { Comment } from "../models/interfaces/comment";
 import { useAxiosPrivateWithAuth } from "./useAxiosPrivate";
+import { useNavigate } from "react-router-dom";
 
 export const useComments = (postId: number) => {
   const [isFetchInProgress, setIsFetchInProgress] = useState<boolean>(false);
   const [commentsPayloadMetaInfo, setCommentsPayloadMetaInfo] =
     useState<PayloadMetaInfo | null>();
 
+  const navigate = useNavigate();
   const axiosWithAuth = useAxiosPrivateWithAuth();
   const commentsState = useContext(AppContext)?.appState.commentsState;
 
@@ -20,14 +22,14 @@ export const useComments = (postId: number) => {
 
   const isMoreComments = useMemo(() => {
     if (
-      !commentsPayloadMetaInfo ||
-      !commentsPayloadMetaInfo.total_entries ||
-      !comments
-    )
+      commentsPayloadMetaInfo === undefined ||
+      commentsPayloadMetaInfo === null ||
+      commentsPayloadMetaInfo.total_entries === null
+    ) {
       return true;
+    }
 
-    const isMorePosts = comments.length < commentsPayloadMetaInfo.total_entries;
-    return isMorePosts;
+    return comments.length < commentsPayloadMetaInfo.total_entries;
   }, [commentsPayloadMetaInfo, comments]);
 
   const getNextPageNumber = (currentPageNumber: number | undefined | null) =>
@@ -66,7 +68,7 @@ export const useComments = (postId: number) => {
         });
       setIsFetchInProgress(false);
     }
-  }, []);
+  }, [commentsPayloadMetaInfo, commentsState]);
 
   useEffect(() => {
     fetchNextCommentPage();
@@ -93,12 +95,14 @@ export const useComments = (postId: number) => {
           updatedCommentsMap.set(postId, postsUpdatedComments);
           commentsState.setComments(updatedCommentsMap);
         }
-        console.log(response.data);
       })
-      .catch((err) => console.error(err));
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
 
   return {
+    loading: isFetchInProgress,
     commentsState,
     handlePostComment,
     fetchNextCommentPage,
